@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  APIContentViewController.swift
 //  CMoneyInterViewQuestions
 //
 //  Created by Neal on 2020/4/7.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class APIContentViewController: UIViewController {
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
-
-
+    
 }
-
