@@ -15,5 +15,10 @@ class Transitions {
         
         return APIContentViewController()
     }
+    
+    static func transitionsContentDetail() -> UIViewController {
+        
+        return ContentDetailViewController()
+    }
 }
 

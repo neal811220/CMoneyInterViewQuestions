@@ -13,9 +13,7 @@ class HomeViewController: UIViewController {
     let requestAPIButton: UIButton = {
         
         let button = UIButton()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+                
         button.setTitleColor(UIColor.blue, for: .normal)
         
         button.setTitle("Request API", for: .normal)
@@ -32,7 +30,6 @@ class HomeViewController: UIViewController {
         
         setupRequestAPIButton()
         
-        // Do any additional setup after loading the view.
     }
     
     // MARK: SetupInfo
