@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PhotosProvider {
     
@@ -34,5 +35,32 @@ class PhotosProvider {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func imageURLTransformImage(paging: Int, photoURLString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        
+        guard let imageURL = URL(string: photoURLString) else {
+            
+            completion(.failure(NAHTTPClientError.URLError))
+            return
+        }
+        
+        URLSession.shared.delegateQueue.maxConcurrentOperationCount = 40
+        
+        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            
+            guard let data = data, error == nil else {
+                
+                return
+            }
+            
+            guard let image = UIImage(data: data) else {
+                
+                return
+            }
+            
+            completion(.success(image))
+            
+        }.resume()
     }
 }

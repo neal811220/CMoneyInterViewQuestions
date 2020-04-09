@@ -24,7 +24,7 @@ class APIContentCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         
         label.text = "ID"
-        
+                
         return label
     }()
     
@@ -33,7 +33,7 @@ class APIContentCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         
         label.text = "123"
-        
+                
         label.textAlignment = .center
         
         return label
@@ -58,6 +58,12 @@ class APIContentCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
         
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.thumbnailView.image = nil
     }
     
     func setupThumbnailView() {

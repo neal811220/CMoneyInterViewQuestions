@@ -20,14 +20,20 @@ class ContentDetailTableViewCell: UITableViewCell {
     }()
     
     let idLabel: UILabel = {
+        
         let label = UILabel()
+        
         label.text = "ID:"
+        
         return label
     }()
     
     let titleLabel: UILabel = {
+        
         let label = UILabel()
+        
         label.text = "title:"
+        
         return label
     }()
     

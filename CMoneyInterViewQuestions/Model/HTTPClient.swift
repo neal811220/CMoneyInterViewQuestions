@@ -17,6 +17,8 @@ enum NAHTTPClientError: Error {
     case serverError
     
     case unexpectedError
+    
+    case URLError
 }
 
 enum NAHTTPMethod: String {

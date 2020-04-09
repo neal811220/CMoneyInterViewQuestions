@@ -33,7 +33,9 @@ class APIContentViewController: UIViewController {
     
     let colorArray = ["red", "blue", "yellow", "black"]
     
-//    var datas: [Any] = []
+    var datas: [Photos] = []
+    
+    var currentDatas: [Photos] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +72,17 @@ class APIContentViewController: UIViewController {
                 
             case .success(let data):
                 
-                print(data)
+                self.datas = data
+                
+                for index in 0 ..< 40 {
+                    
+                    self.currentDatas.append(self.datas[index])
+                }
+                    
+                DispatchQueue.main.async {
+                    
+                    self.collectionView.reloadData()
+                }
                 
             case .failure(let error):
                 
@@ -79,14 +91,13 @@ class APIContentViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension APIContentViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return datas.count
-        return 100
+        
+        return datas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,13 +106,44 @@ extension APIContentViewController: UICollectionViewDataSource {
             withReuseIdentifier: String(describing: APIContentCollectionViewCell.self),
             for: indexPath) as? APIContentCollectionViewCell
             else {
-            return UICollectionViewCell()
+                return UICollectionViewCell()
         }
         
-        if indexPath.row % 2 == 0 {
-            cell.thumbnailView.image = UIImage(named: "771796")
-        } else {
-            cell.thumbnailView.image = UIImage(named: "f66b97")
+        if indexPath.row > currentDatas.count - 10 {
+            
+            for index in currentDatas.count ..< currentDatas.count + 30 {
+                
+                currentDatas.append(datas[index])
+                
+            }
+        }
+        
+        cell.idLabel.text = String(datas[indexPath.row].id)
+        
+        cell.titleLabel.text = datas[indexPath.row].title
+        
+        cell.tag = indexPath.row
+                
+        photoProvider.imageURLTransformImage(paging: indexPath.row, photoURLString: currentDatas[indexPath.row].thumbnailUrl) { (result) in
+            
+            switch result {
+                
+            case .success(let image):
+                
+                DispatchQueue.main.async {
+                    
+                    if cell.tag == indexPath.row {
+                        
+                        cell.thumbnailView.image = image
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
         }
         
         return cell
