@@ -19,6 +19,12 @@
 		183A2158243C457600BF7CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183A2157243C457600BF7CE1 /* Assets.xcassets */; };
 		183A215B243C457600BF7CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183A2159243C457600BF7CE1 /* LaunchScreen.storyboard */; };
 		183A2169243C5FF600BF7CE1 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A2168243C5FF600BF7CE1 /* UIView+Extension.swift */; };
+		18FA9528243E0205006CDBB3 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA9527243E0205006CDBB3 /* HTTPClient.swift */; };
+		18FA952A243E27A2006CDBB3 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA9529243E27A2006CDBB3 /* Bundle+Extension.swift */; };
+		18FA952C243E282B006CDBB3 /* NAConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA952B243E282B006CDBB3 /* NAConstant.swift */; };
+		18FA952E243E3335006CDBB3 /* PhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA952D243E3335006CDBB3 /* PhotosRequest.swift */; };
+		18FA9530243E35D4006CDBB3 /* PhotosProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA952F243E35D4006CDBB3 /* PhotosProvider.swift */; };
+		18FA9532243E3699006CDBB3 /* PhotosObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA9531243E3699006CDBB3 /* PhotosObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +42,12 @@
 		183A215A243C457600BF7CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		183A215C243C457600BF7CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183A2168243C5FF600BF7CE1 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		18FA9527243E0205006CDBB3 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		18FA9529243E27A2006CDBB3 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		18FA952B243E282B006CDBB3 /* NAConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAConstant.swift; sourceTree = "<group>"; };
+		18FA952D243E3335006CDBB3 /* PhotosRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosRequest.swift; sourceTree = "<group>"; };
+		18FA952F243E35D4006CDBB3 /* PhotosProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosProvider.swift; sourceTree = "<group>"; };
+		18FA9531243E3699006CDBB3 /* PhotosObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +114,10 @@
 		183A2164243C5EF800BF7CE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18FA952F243E35D4006CDBB3 /* PhotosProvider.swift */,
+				18FA9531243E3699006CDBB3 /* PhotosObject.swift */,
+				18FA952D243E3335006CDBB3 /* PhotosRequest.swift */,
+				18FA9527243E0205006CDBB3 /* HTTPClient.swift */,
 				1805433B243C6FB000C431D0 /* Transitions.swift */,
 			);
 			path = Model;
@@ -110,6 +126,7 @@
 		183A2166243C5F8500BF7CE1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				18FA952B243E282B006CDBB3 /* NAConstant.swift */,
 				183A2157243C457600BF7CE1 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -118,6 +135,7 @@
 		183A2167243C5FA700BF7CE1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18FA9529243E27A2006CDBB3 /* Bundle+Extension.swift */,
 				1805433D243C7C1A00C431D0 /* UICollectionView+Extension.swift */,
 				18054343243C9B7F00C431D0 /* UITableView+Extension.swift */,
 				183A2168243C5FF600BF7CE1 /* UIView+Extension.swift */,
@@ -196,11 +214,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1805433E243C7C1A00C431D0 /* UICollectionView+Extension.swift in Sources */,
+				18FA9532243E3699006CDBB3 /* PhotosObject.swift in Sources */,
 				183A2169243C5FF600BF7CE1 /* UIView+Extension.swift in Sources */,
 				18054344243C9B7F00C431D0 /* UITableView+Extension.swift in Sources */,
 				1805433C243C6FB000C431D0 /* Transitions.swift in Sources */,
+				18FA952E243E3335006CDBB3 /* PhotosRequest.swift in Sources */,
 				18054342243C98C000C431D0 /* ContentDetailViewController.swift in Sources */,
+				18FA9530243E35D4006CDBB3 /* PhotosProvider.swift in Sources */,
+				18FA952C243E282B006CDBB3 /* NAConstant.swift in Sources */,
 				18054340243C7DB100C431D0 /* APIContentCollectionViewCell.swift in Sources */,
+				18FA9528243E0205006CDBB3 /* HTTPClient.swift in Sources */,
+				18FA952A243E27A2006CDBB3 /* Bundle+Extension.swift in Sources */,
 				1805433A243C66CD00C431D0 /* APIContentViewController.swift in Sources */,
 				183A2153243C457400BF7CE1 /* HomeViewController.swift in Sources */,
 				18054346243C9BE000C431D0 /* ContentDetailTableViewCell.swift in Sources */,

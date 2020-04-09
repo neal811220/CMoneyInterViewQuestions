@@ -18,6 +18,8 @@ class ContentDetailViewController: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         
+        tableView.separatorStyle = .none
+        
         tableView.registerContentDetailCell(tableView: tableView)
                 
         return tableView

@@ -10,16 +10,32 @@ import UIKit
 
 class APIContentCollectionViewCell: UICollectionViewCell {
 
+    let thumbnailView: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: "92c952")
+        
+        return imageView
+    }()
+    
     let idLabel: UILabel = {
+        
         let label = UILabel()
+        
         label.text = "ID"
+        
         return label
     }()
     
     let titleLabel: UILabel = {
+       
         let label = UILabel()
+        
         label.text = "123"
+        
         label.textAlignment = .center
+        
         return label
     }()
     
@@ -31,21 +47,40 @@ class APIContentCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupThumbnailView()
+        
         setupIDLabel()
         
         setupTitleLabel()
     }
     
     required init?(coder: NSCoder) {
+        super.init(coder: coder)
         
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupThumbnailView() {
+           
+           self.addSubview(thumbnailView)
+           
+           thumbnailView.anchor(
+               
+               top: self.topAnchor,
+               
+               bottom: self.bottomAnchor,
+               
+               left: self.leftAnchor,
+               
+               right: self.rightAnchor
+           )
+       }
     
     func setupIDLabel() {
         
         self.addSubview(idLabel)
         
-        idLabel.anchor(centerX: contentView.centerXAnchor, centerY: contentView.centerYAnchor)
+        idLabel.anchor(centerX: self.centerXAnchor, centerY: self.centerYAnchor, paddingCenterY: -self.frame.height / 4)
     }
     
     func setupTitleLabel() {
@@ -53,9 +88,14 @@ class APIContentCollectionViewCell: UICollectionViewCell {
         self.addSubview(titleLabel)
         
         titleLabel.anchor(
-            bottom: contentView.bottomAnchor,
-            left: contentView.leftAnchor,
-            right: contentView.rightAnchor
+            
+            left: self.leftAnchor,
+            
+            right: self.rightAnchor,
+            
+            centerY: self.centerYAnchor,
+            
+            paddingCenterY: self.frame.height / 4
         )
     }
 }

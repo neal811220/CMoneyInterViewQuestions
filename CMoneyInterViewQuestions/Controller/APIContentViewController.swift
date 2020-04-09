@@ -29,15 +29,21 @@ class APIContentViewController: UIViewController {
         return collectionView
     }()
     
+    let photoProvider = PhotosProvider()
+    
     let colorArray = ["red", "blue", "yellow", "black"]
     
 //    var datas: [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.white
+        
         setupCollectionView()
-        // Do any additional setup after loading the view.
+        
+        fetchPhotos()
+        
     }
     
     func setupCollectionView() {
@@ -54,6 +60,24 @@ class APIContentViewController: UIViewController {
                               
             right: view.rightAnchor
         )
+    }
+    
+    func fetchPhotos() {
+        
+        photoProvider.fetchPhotos { (result) in
+            
+            switch result {
+                
+            case .success(let data):
+                
+                print(data)
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+        }
     }
     
 }
@@ -75,9 +99,9 @@ extension APIContentViewController: UICollectionViewDataSource {
         }
         
         if indexPath.row % 2 == 0 {
-             cell.backgroundColor = UIColor.red
+            cell.thumbnailView.image = UIImage(named: "771796")
         } else {
-            cell.backgroundColor = UIColor.yellow
+            cell.thumbnailView.image = UIImage(named: "f66b97")
         }
         
         return cell

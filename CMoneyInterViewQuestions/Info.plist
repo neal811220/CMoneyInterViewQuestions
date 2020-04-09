@@ -39,5 +39,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>ThumbnailUrl</key>
+	<string>https://jsonplaceholder.typicode.com</string>
 </dict>
 </plist>
