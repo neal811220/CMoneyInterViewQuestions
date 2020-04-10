@@ -31,9 +31,7 @@ class APIContentViewController: UIViewController {
     
     let photoProvider = PhotosProvider()
     
-    let colorArray = ["red", "blue", "yellow", "black"]
-    
-//    var datas: [Any] = []
+    let activityView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +39,8 @@ class APIContentViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         setupCollectionView()
+        
+        setupActivityView()
         
         fetchPhotos()
         
@@ -62,15 +62,34 @@ class APIContentViewController: UIViewController {
         )
     }
     
+    func setupActivityView() {
+        
+        view.addSubview(activityView)
+        
+        activityView.anchor(
+            
+            centerX: view.centerXAnchor,
+            
+            centerY: view.centerYAnchor,
+            
+            width: view.frame.width / 10,
+            
+            height: view.frame.width / 10
+        )
+    }
+    
     func fetchPhotos() {
         
-        photoProvider.fetchPhotos { (result) in
+        photoProvider.fetchPhotos { result in
             
             switch result {
                 
-            case .success(let data):
+            case .success:
                 
-                print(data)
+                DispatchQueue.main.async {
+                    
+                    self.collectionView.reloadData()
+                }
                 
             case .failure(let error):
                 
@@ -79,14 +98,13 @@ class APIContentViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension APIContentViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return datas.count
-        return 100
+        
+        return PhotoDataManager.shared.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,13 +113,48 @@ extension APIContentViewController: UICollectionViewDataSource {
             withReuseIdentifier: String(describing: APIContentCollectionViewCell.self),
             for: indexPath) as? APIContentCollectionViewCell
             else {
-            return UICollectionViewCell()
+                return UICollectionViewCell()
         }
         
-        if indexPath.row % 2 == 0 {
-            cell.thumbnailView.image = UIImage(named: "771796")
-        } else {
-            cell.thumbnailView.image = UIImage(named: "f66b97")
+        cell.idLabel.text = String(PhotoDataManager.shared.currentPhotos[indexPath.row].id)
+        
+        cell.titleLabel.text = PhotoDataManager.shared.currentPhotos[indexPath.row].title
+        
+        cell.tag = indexPath.row
+        
+        DispatchQueue.main.async {
+            
+            self.activityView.startAnimating()
+            
+        }
+                
+        photoProvider.imageURLTransformImage(
+        paging: indexPath.row,
+        photoURLString: PhotoDataManager.shared.currentPhotos[indexPath.row].thumbnailUrl) { (result) in
+            
+            switch result {
+                
+            case .success(let image):
+                
+                DispatchQueue.main.async {
+                    
+                    if cell.tag == indexPath.row {
+                        
+                        cell.thumbnailView.image = image
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+            DispatchQueue.main.async {
+                
+                self.activityView.stopAnimating()
+            }
+            
         }
         
         return cell
@@ -114,8 +167,11 @@ extension APIContentViewController: UICollectionViewDelegate {
         
         let contentDetailVC = Transitions.transitionsContentDetail()
         
+        PhotoDataManager.shared.currentIndexPath = indexPath
+        
         show(contentDetailVC, sender: nil)
     }
+    
 }
 
 extension APIContentViewController: UICollectionViewDelegateFlowLayout {

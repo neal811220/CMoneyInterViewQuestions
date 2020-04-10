@@ -26,12 +26,18 @@ class ContentDetailViewController: UIViewController {
         
     }()
     
+    let photoProvider = PhotosProvider()
+    
+    let activityView = UIActivityIndicatorView()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
         
         setupTableView()
+        
+        setupActivityView()
     }
     
     func setupTableView() {
@@ -47,6 +53,22 @@ class ContentDetailViewController: UIViewController {
             left: view.leftAnchor,
             
             right: view.rightAnchor
+        )
+    }
+    
+    func setupActivityView() {
+        
+        view.addSubview(activityView)
+        
+        activityView.anchor(
+            
+            centerX: view.centerXAnchor,
+            
+            centerY: view.centerYAnchor,
+            
+            width: view.frame.width / 10,
+            
+            height: view.frame.width / 10
         )
     }
     
@@ -67,7 +89,45 @@ extension ContentDetailViewController: UITableViewDataSource {
             else {
             return UITableViewCell()
         }
-
+        
+        guard let currentIndexPath = PhotoDataManager.shared.currentIndexPath else {
+            
+            return UITableViewCell()
+        }
+        
+        cell.idLabel.text = "ID: \(String(PhotoDataManager.shared.currentPhotos[currentIndexPath.row].id))"
+        
+        cell.titleLabel.text = "Title: \(PhotoDataManager.shared.currentPhotos[currentIndexPath.row].title)"
+        
+        DispatchQueue.main.async {
+            
+            self.activityView.startAnimating()
+            
+        }
+        
+        photoProvider.imageURLTransformImage(paging: currentIndexPath.row, photoURLString: PhotoDataManager.shared.currentPhotos[currentIndexPath.row].url) { result in
+            
+            switch result {
+                
+            case .success(let photo):
+                
+                DispatchQueue.main.async {
+                    
+                    cell.thumbnailView.image = photo
+                    
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+            DispatchQueue.main.async {
+                
+                self.activityView.stopAnimating()
+            }
+        }
+        
         return cell
     }
 }
