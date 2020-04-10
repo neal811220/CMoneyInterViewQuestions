@@ -13,27 +13,21 @@ class APIContentCollectionViewCell: UICollectionViewCell {
     let thumbnailView: UIImageView = {
         
         let imageView = UIImageView()
-        
-        imageView.image = UIImage(named: "92c952")
-        
+                
         return imageView
     }()
     
     let idLabel: UILabel = {
         
         let label = UILabel()
-        
-        label.text = "ID"
-                
+                        
         return label
     }()
     
     let titleLabel: UILabel = {
        
         let label = UILabel()
-        
-        label.text = "123"
-                
+                        
         label.textAlignment = .center
         
         return label

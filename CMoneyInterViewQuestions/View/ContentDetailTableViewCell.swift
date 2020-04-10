@@ -13,18 +13,14 @@ class ContentDetailTableViewCell: UITableViewCell {
     let thumbnailView: UIImageView = {
         
         let imageView = UIImageView()
-        
-        imageView.image = UIImage(named: "92c952")
-        
+                
         return imageView
     }()
     
     let idLabel: UILabel = {
         
         let label = UILabel()
-        
-        label.text = "ID:"
-        
+                
         return label
     }()
     
@@ -32,7 +28,7 @@ class ContentDetailTableViewCell: UITableViewCell {
         
         let label = UILabel()
         
-        label.text = "title:"
+        label.numberOfLines = 0
         
         return label
     }()
